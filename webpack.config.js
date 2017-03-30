@@ -21,6 +21,10 @@ module.exports = {
                 ]
             },
             {
+                test: /\.vue$/,
+                loader: "vue-loader"
+            },
+            {
                 test: /\.jsx$/,
                 loader: "babel-loader", // Do not use "use" here
                 exclude: /node_modules/,
@@ -31,6 +35,11 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
+        }
+    }
     // plugins: [
     //     new webpack.LoaderOptionsPlugin({
     //         // test: /\.xxx$/, // may apply this only for some modules
