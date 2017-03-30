@@ -1,5 +1,7 @@
+var debug = process.env.NODE_ENV !== "production";
+
 module.exports = {
-    devtool: "sourcemap",
+    devtool: debug ? "sourcemap" : null,
     entry: "./js/entry.js",
     output: {
         filename:"bundle.js"
@@ -39,16 +41,11 @@ module.exports = {
         alias: {
             'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' for webpack 1
         }
-    }
-    // plugins: [
-    //     new webpack.LoaderOptionsPlugin({
-    //         // test: /\.xxx$/, // may apply this only for some modules
-    //         options: {
-    //             babel: {
-    //                 presets: ['es2015','stage-0'],
-    //                 plugins: ['transform-runtime']
-    //             }
-    //         }
-    //     })
-    // ]
+    },
+    plugins: debug ? [] : [
+        // new webpack.LoaderOptionsPlugin(),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({ mangle:false, sourceMap:false })
+    ]
 };

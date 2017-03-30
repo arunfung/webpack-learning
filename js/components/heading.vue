@@ -9,7 +9,8 @@
     export default{
         data(){
             return {
-                message: 'hello vue'
+                message: 'webpack-dev-server --inline --hot',
+                mes: 'webpack --profile --json > stats.json'
             }
         }
     }
